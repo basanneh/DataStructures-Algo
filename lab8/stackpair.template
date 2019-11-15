@@ -1,0 +1,126 @@
+#include <iostream>
+#include "stackpair.h"
+#include <cassert>
+
+using namespace std;
+
+template <class T>
+stackpair<T>::stackpair() 
+{
+    top_A = 0;
+    top_B = CAPACITY - 1;
+    
+
+}
+
+template <class T>
+bool stackpair<T>::is_empty_a()
+{
+    return top_A == 0;
+    
+}
+template <class T>
+bool stackpair<T>::is_empty_b()
+{
+    return top_B == CAPACITY-1;
+    
+}
+template <class T>
+bool stackpair<T>::is_full_a()
+{
+    return top_A > top_B;
+}
+template <class T>
+bool stackpair<T>::is_full_b()
+{
+    return top_A > top_B;
+}
+
+
+
+template <class T>
+T stackpair<T>::pop_a()
+{
+    
+    if (is_empty_a())
+    {
+        cout<<"Stack A is empty. Stack under Flow , Test 4 failed"<<endl;
+        
+    }
+    else
+    {
+        assert(!is_empty_a());
+        top_A--;
+        return data[top_A];
+    }
+}
+
+template <class T>
+T stackpair<T>::pop_b()
+{
+        if (is_empty_b())
+    {
+        cout<<"Stack B is empty. Stack under Flow , Test 4 failed"<<endl;
+        
+    }
+    else
+    {
+        assert(!is_empty_b());
+        top_B++;
+        return data[top_B];
+    }
+}
+
+template <class T>
+void stackpair<T>::push_a(T item)
+{   
+        if (is_full_a())
+        {
+            cout<<"The stack is full. Stack OverFlow , Test 3 failed"<<endl;
+        }
+        else 
+        {
+            cout<< item << " was pushed into stack"<< endl;
+            data[top_A] = item;
+            top_A++;
+        }
+        
+}
+
+template <class T>
+void stackpair<T>::push_b(T item)
+{
+            if (is_full_b())
+        {
+            cout<<"The stack is full. Stack OverFlow , Test 3 failed"<<endl;
+        }
+        else 
+        {
+            cout<< item << " was pushed into stack"<< endl;
+            data[top_B] = item;
+            top_B--;
+        }
+}
+
+template <class T>
+size_t stackpair<T>::size_a()
+{
+    return top_A;
+}
+
+template <class T>
+size_t stackpair<T>::size_b()
+{
+    return top_B;
+}
+
+template <class T>
+void stackpair<T>::display()
+{
+
+    cout<<"All values in the stack are "<<endl;
+    for(int i=0;i<CAPACITY;i++)
+    {
+        cout<<data[i]<<"  ";
+    }
+}
