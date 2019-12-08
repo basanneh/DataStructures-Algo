@@ -1,0 +1,83 @@
+//heap.template
+#include "heap.h"
+#include <algorithm>
+#include <cassert>
+
+using namespace std;
+
+template<typename T>
+heap<T>::heap()
+{
+}
+
+template<typename T>
+size_t heap<T>::size() const
+{
+    return v.size();
+}
+
+template<typename T>
+bool heap<T>::is_empty() const
+{
+    return size() == 0;
+}
+
+template<typename T>
+void heap<T>::insert (const T& item)
+{
+    v.push_back(item);
+    size_t index = v.size() -1;
+    while (index != 0 && v[index] > v[(index - 1)/2])
+    {
+        std::swap (v[index], v[(index - 1) / 2]);
+        index = (index - 1) / 2;
+    }
+}
+
+template<typename T>
+void heap<T>::remove()
+{
+    assert (!is_empty());
+    v[0] =  v[size() -1];
+    v.pop_back();
+    size_t index = 0;
+    while(2 * index + 1 < v.size() && v[index] < v[max_child(index)])
+    {
+       int mc = max_child(index);
+        std::swap (v[index], v[max_child (index)]);
+        //index = max_child (index);
+        index = mc;
+    }
+}
+
+/////////////////////
+template<typename T>
+T heap<T>::max() const
+{
+    assert (!is_empty());
+    return v[0];
+}
+
+///////////////////
+
+template<typename T>
+T& heap<T>::max()
+{
+    assert (!is_empty());
+    return v[0];
+}
+
+template<typename T>
+size_t heap<T>::max_child (size_t index) const
+{
+    assert (2 * index + 1 <v.size());
+    size_t result;
+    if (2 * index + 1 == v.size() - 1)
+        result = 2 * index + 1;
+    else if (v[2 * index + 1] > v[2 * index + 2])
+        result = 2 * index + 1;
+    else
+        result = 2 * index + 2;
+    return result;
+    
+}

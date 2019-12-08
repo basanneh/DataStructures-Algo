@@ -1,0 +1,38 @@
+//priority_queue.template
+
+template <typename T>
+priority_queue<T>::priority_queue()
+{
+}
+
+template <typename T>
+void priority_queue<T>::pop()
+{
+    h.remove();
+}
+
+template <typename T>
+void priority_queue<T>::push(const T& item)
+{
+    h.insert (item);
+}
+
+template <typename T>
+bool priority_queue<T>::empty() const
+{
+    return size() == 0;
+}
+
+template <typename T>
+size_t priority_queue<T>::size() const
+{
+    return h.size();
+}
+
+template <typename T>
+T priority_queue<T>::top() const
+{
+    return h.max();
+}
+
+
